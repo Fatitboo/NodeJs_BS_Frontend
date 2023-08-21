@@ -1,5 +1,6 @@
 const cors = require('cors');
 const express = require('express');
+const  route  = require('../routers/router');
 const app = express();
 
 app.use(cors());
@@ -12,5 +13,5 @@ app.engine('ejs', require('ejs').__express);
 app.use(express.static('public'))
 app.use(express.static('views'))
 
-
+app.use('/', route)
 module.exports = app;
