@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>
+        <%=title%>
+    </title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <%-include('includes/nav.ejs')%>
+
+        <!-- Signup-->
+        <section class="signup-section" id="signup">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-black"></i>
+                        <h2 class="text-black">Add a book</h2>
+                        <% if(typeof(message) !== "undefined") { %>
+                            <div class="mb-5" style="display: block; text-align: center; color: #853035;" ><%-message %></div>
+                        <% } %>
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <form class="form-signup" id="addBookForm" action="/books" method="POST" >
+                            <!-- Email address input-->
+                            <div class="row input-group-newsletter">
+                                <div class="mb-3">
+                                    <input class="form-control" id="title" type="text" placeholder="Enter title...."
+                                        name="title" aria-label="Enter title...." 
+                                        <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.title%>" 
+                                            <%}%>
+                                        />
+                                    <% if(typeof(errs) !== "undefined") { %>
+                                        <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.titleMsg %></div>
+                                    <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="author" type="text" name="author"
+                                        placeholder="Enter author...." aria-label="Enter author...." <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.author%>" 
+                                            <%}%>/>
+                                        <% if(typeof(errs) !== "undefined") { %>
+                                            <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.authorMsg %></div>
+                                        <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="ISBN" name="ISBN" type="text" placeholder="Enter ISBN..."
+                                    aria-label="Enter ISBN..." <% if(typeof(body) !== "undefined") {%>
+                                        value="<%-body.ISBN%>" 
+                                        <%}%>/>
+                                    <% if(typeof(errs) !== "undefined") { %>
+                                        <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.ISBNMsg %></div>
+                                    <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="numberOfPages" name="numberOfPages" type="number" placeholder="Enter numberOfPages..."
+                                        aria-label="Enter numberOfPages...." <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.numberOfPages%>" 
+                                            <%}%>/>
+                                        <% if(typeof(errs) !== "undefined") { %>
+                                            <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.numberOfPagesMsg %></div>
+                                        <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="price" name="price" type="number" placeholder="Enter price...."
+                                        aria-label="Enter price...." <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.price%>" 
+                                            <%}%>/>
+                                        <% if(typeof(errs) !== "undefined") { %>
+                                            <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.priceMsg %></div>
+                                        <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="yearPublished" name="yearPublished" type="text" placeholder="Enter yearPublished...."
+                                        aria-label="Enter yearPublished..." <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.yearPublished%>" 
+                                            <%}%>/>
+                                        <% if(typeof(errs) !== "undefined") { %>
+                                            <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.yearPublishedMsg %></div>
+                                        <% } %>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg" id="submitButton"
+                                        type="submit">Submit</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <%-include('includes/footer.ejs')%>
+            <!-- Bootstrap core JS-->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Core theme JS-->
+            <script src="js/scripts.js"></script>
+            <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+            <!-- * *                               SB Forms JS                               * *-->
+            <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+            <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+            <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>

@@ -9,10 +9,10 @@ const validationRegistration = (body) => {
     if (body.address?.trim().length < 3 || !/^[\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\.']+$/.test(body.address?.trim())) {
         errors.addressMsg = 'Address must be 3 characters or more'
     }
-    if (body.city?.trim().length < 2 || !/^.+\s.+$/.test(body.city?.trim())) {
+    if (body.city?.trim().length < 2 || !/^[\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\.']+$/.test(body.city?.trim())) {
         errors.cityMsg = 'City is required'
     }
-    if (body.state?.trim().length < 2 || !/^.+\s.+$/.test(body.state?.trim())) {
+    if (body.state?.trim().length < 2 || !/^[\d{1,5}\s\w.\s(\b\w*\b\s){1,2}\w*\.']+$/.test(body.state?.trim())) {
         errors.stateMsg = 'State is required'
     }
     if (body.zip?.trim().length < 2 || !/^\d{5}$/.test(body.zip?.trim())) {
@@ -21,10 +21,10 @@ const validationRegistration = (body) => {
     if (body.email?.trim() == '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(body.email?.trim())) {
         errors.emailMsg = 'Invalid Email formated'
     }
-    if (body.password?.trim().length < 2 || !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(body.password?.trim())) {
+    if (body.password?.trim().length < 2 ) {
         errors.passwordMsg = 'Invalid password formated'
     }
-    if (body.confirmPassword?.trim().length < 2 || !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(body.confirmPassword?.trim())) {
+    if (body.confirmPassword?.trim().length < 2 ) {
         errors.confirmPasswordMsg = 'Invalid cpassword formated'
     }
     if(body.confirmPassword?.trim() !==body.password?.trim()){
@@ -38,7 +38,7 @@ const validationLogin=(body)=>{
     if (body.email?.trim() == '' || !/^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/.test(body.email?.trim())) {
         errors.emailMsg = 'Invalid Email formated'
     }
-    if (body.password?.trim().length < 2 || !/^(?=.*\d)(?=.*[!@#$%^&*])(?=.*[a-z])(?=.*[A-Z]).{8,}$/.test(body.password?.trim())) {
+    if (body.password?.trim().length < 1 ) {
         errors.passwordMsg = 'Invalid password formated' // upcase, lowercase, num, ktdb
     }
     return errors

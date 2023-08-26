@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no" />
+    <meta name="description" content="" />
+    <meta name="author" content="" />
+    <title>
+        <%=title%>
+    </title>
+    <link rel="icon" type="image/x-icon" href="favicon.ico" />
+    <!-- Font Awesome icons (free version)-->
+    <script src="https://use.fontawesome.com/releases/v6.3.0/js/all.js" crossorigin="anonymous"></script>
+    <!-- Google fonts-->
+    <link href="https://fonts.googleapis.com/css?family=Varela+Round" rel="stylesheet" />
+    <link
+        href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+        rel="stylesheet" />
+    <!-- Core theme CSS (includes Bootstrap)-->
+    <link href="../css/styles.css" rel="stylesheet" type="text/css"/>
+</head>
+
+<body id="page-top">
+    <!-- Navigation-->
+    <%-include('includes/nav.ejs')%>
+
+        <!-- Signup-->
+        <section class="signup-section" id="signup">
+            <div class="container px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5">
+                    <div class="col-md-10 col-lg-8 mx-auto text-center">
+                        <i class="far fa-paper-plane fa-2x mb-2 text-black"></i>
+                        <h2 class="text-black">Add a author</h2>
+                        <% if(typeof(message) !== "undefined") { %>
+                            <div class="mb-5" style="display: block; text-align: center; color: #853035;" ><%-message %></div>
+                        <% } %>
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- * * SB Forms Contact Form * *-->
+                        <!-- * * * * * * * * * * * * * * *-->
+                        <!-- This form is pre-integrated with SB Forms.-->
+                        <!-- To make this form functional, sign up at-->
+                        <!-- https://startbootstrap.com/solution/contact-forms-->
+                        <!-- to get an API token!-->
+                        <form class="form-signup" id="addAuthorForm" action="/authors" method="POST" >
+                            <!-- Email address input-->
+                            <div class="row input-group-newsletter">
+                                <div class="mb-3">
+                                    <input class="form-control" id="name" type="text" placeholder="Enter name...."
+                                        name="name" aria-label="Enter name...." 
+                                        <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.name%>" 
+                                            <%}%>
+                                        />
+                                    <% if(typeof(errs) !== "undefined") { %>
+                                        <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.nameMsg %></div>
+                                    <% } %>
+                                </div>
+                                <div class="mb-3 row input-group-newsletter" >
+                                    <div class="col">
+                                        <% if(typeof(data)!== 'undefined') {%>
+                                            <select class="form-control" style=" height: 60px; padding-left: 30px; border-color: transparent; box-shadow: #853035;" name="bookId">
+                                                <% data.map(book=>{%>
+                                                    <option value="<%-book._id%>"><%-book.title%></option>
+                                                <%})%>
+                                            </select>
+                                        <%}%>
+                                    </div>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="publisher" name="publisher" type="text" placeholder="Enter publisher..."
+                                    aria-label="Enter publisher..." <% if(typeof(body) !== "undefined") {%>
+                                        value="<%-body.publisher%>" 
+                                        <%}%>/>
+                                    <% if(typeof(errs) !== "undefined") { %>
+                                        <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.publisherMsg %></div>
+                                    <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="website" name="website" type="text" placeholder="Enter website..."
+                                        aria-label="Enter website...." <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.website%>" 
+                                            <%}%>/>
+                                        <% if(typeof(errs) !== "undefined") { %>
+                                            <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.websiteMsg %></div>
+                                        <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="twitter" name="twitter" type="text" placeholder="Enter twitter...."
+                                        aria-label="Enter twitter...." <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.twitter%>" 
+                                            <%}%>/>
+                                        <% if(typeof(errs) !== "undefined") { %>
+                                            <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.twitterMsg %></div>
+                                        <% } %>
+                                </div>
+                                <div class="mb-3">
+                                    <input class="form-control" id="about" name="about" type="text" placeholder="Enter about...."
+                                        aria-label="Enter about..." <% if(typeof(body) !== "undefined") {%>
+                                            value="<%-body.about%>" 
+                                            <%}%>/>
+                                        <% if(typeof(errs) !== "undefined") { %>
+                                            <div style="display: block; text-align: left; color: #853035; margin-top: 5px; margin-left: 5px;" ><%-errs.aboutMsg %></div>
+                                        <% } %>
+                                </div>
+                                
+                                <div class="d-grid">
+                                    <button class="btn btn-primary btn-lg" id="submitButton"
+                                        type="submit">Submit</button>
+                                </div>
+                                
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </section>
+        <!-- Footer-->
+        <%-include('includes/footer.ejs')%>
+            <!-- Bootstrap core JS-->
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
+            <!-- Core theme JS-->
+            <script src="js/scripts.js"></script>
+            <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+            <!-- * *                               SB Forms JS                               * *-->
+            <!-- * * Activate your form at https://startbootstrap.com/solution/contact-forms * *-->
+            <!-- * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * * *-->
+            <script src="https://cdn.startbootstrap.com/sb-forms-latest.js"></script>
+</body>
+
+</html>
