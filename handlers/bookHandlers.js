@@ -8,33 +8,38 @@ const getBookHandler =async (req, res) => {
     try {
         session=req.session
         req.headers.authorization = 'Bearer: ' + session.token;
+        console.log(session)
         const books = await getBooks(req);
         let arrBooks = books.data.result;
         if(arrBooks.length>0){
-            successTemplate(res, 'books', 'Books', session, books.data.message, arrBooks)
+            successTemplate(res, 'Books', 'books', session, books.data.message, arrBooks)
         }else{
-            successTemplate(res, 'books', 'Books', session)
+            successTemplate(res, 'Books', 'books', session)
         }
     } catch (error) {
-        return errorTemplate(req, res, 'books', 'Books', error.message, 'undefined', session)
+        return errorTemplate(req, res, 'Books', 'books', error.message, 'undefined', session)
     }
 }
 const addBookHandler =async (req, res)=>{
     try {
         session=req.session
+        req.headers.authorization = 'Bearer: ' + session.token;
+        console.log(session)
+        
         successTemplate(res, 'Add a Book', 'addBook',session, null)
     } catch (error) {
-        return errorTemplate(req, res, 'books', 'Books', error.message, 'undefined', session)
+        return errorTemplate(req, res, 'Books', 'books', error.message, error, session)
     }
 }
 const postBookHandler= async (req, res)=>{
     try {
         session=req.session
         req.headers.authorization = 'Bearer: ' + session.token;
+        
         const book = await postBook(req);
         const books = await getBooks(req);
         let arrBooks = books.data.result;
-        successTemplate(res, 'books', 'Books', session, null, arrBooks)
+        successTemplate(res, 'Books', 'books', session, null, arrBooks)
 
     } catch (error) {
         return errorTemplate(req, res, 'Add a Book', 'addBook', error.message, error, session)
@@ -48,7 +53,7 @@ const getEditBookHandler = async (req, res)=>{
         successTemplate(res, 'Edit a book', 'editBook', session, book.data.message, book.data.result)
 
     } catch (error) {
-        return errorTemplate(req, res, 'books', 'Books', error.message, error, session)
+        return errorTemplate(req, res, 'Books', 'books', error.message, error, session)
     }
 }
 const updateBookHandler = async (req, res)=>{
@@ -58,7 +63,7 @@ const updateBookHandler = async (req, res)=>{
         const result = await putBook(req)
         const books = await getBooks(req);
         let arrBooks = books.data.result;
-        successTemplate(res, 'books', 'Books', session, result.data.message, arrBooks)
+        successTemplate(res, 'Books', 'books', session, result.data.message, arrBooks)
     } catch (error) {
         return errorTemplate(req, res, 'Books', 'books', error.message, 'undefined', 'undefined')
     }
@@ -71,7 +76,7 @@ const deleteBookHandler = async (req, res)=>{
         const result = await deleteBook(req)
         const books = await getBooks(req);
         let arrBooks = books.data.result;
-        successTemplate(res, 'books', 'Books', session, result.data.message, arrBooks)
+        successTemplate(res, 'Books', 'books', session, result.data.message, arrBooks)
     } catch (error) {
         return errorTemplate(req, res, 'Books', 'books', error.message, 'undefined', 'undefined')        
     }

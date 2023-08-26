@@ -15,7 +15,6 @@ router.use(session({
     secret: process.env.secret,
     resave: false,
     saveUninitialized: true,
-
 }))
 
 router.get('/', getHomeHandler)

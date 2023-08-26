@@ -9,7 +9,11 @@ const {
     updateBookHandler,
     deleteBookHandler
 } = require('../handlers/bookHandlers')
-
+router.use(session({
+    secret: process.env.secret,
+    resave: false,
+    saveUninitialized: true,
+}))
 router.get('/', getBookHandler)
 router.get('/addBook', addBookHandler)
 router.get('/editBook/:id', getEditBookHandler)

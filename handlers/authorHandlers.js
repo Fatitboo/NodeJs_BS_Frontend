@@ -9,9 +9,9 @@ const getAuthorsHandler = async (req, res)=>{
         session=req.session
         req.headers.authorization = 'Bearer: ' + session.token;
         const authors = await getAuthors(req);
-        successTemplate(res, 'authors', 'Authors', session, authors.data.message, authors.data.result)
+        successTemplate(res, 'Authors', 'authors', session, authors.data.message, authors.data.result)
     } catch (error) {
-        return errorTemplate(req, res, 'authors', 'Authors', error.message, error, session)
+        return errorTemplate(req, res, 'Authors', 'authors', error.message, 'undefined', session)    
     }
 }
 const getAddAuthorHandler = async (req, res)=>{
@@ -22,10 +22,10 @@ const getAddAuthorHandler = async (req, res)=>{
         if((result.data.result).length>0){
             successTemplate(res, 'Add a Author', 'addAuthor',session, result.data.message, result.data.result)
         }else{
-            successTemplate(res, 'Add a Author', 'addAuthor',session, 'Cannot find book, please add book first!')
+            successTemplate(res, 'Add a Author', 'addAuthor',session, "Cannot find book, please add book first!")
         }
     } catch (error) {
-        return errorTemplate(req, res, 'authors', 'Authors', error.message, 'undefined', session)
+        return errorTemplate(req, res, 'Authors', 'authors', error.message, 'undefined', session)    
     }
 }
 const postAuthorHandler =async (req, res)=>{
@@ -34,7 +34,7 @@ const postAuthorHandler =async (req, res)=>{
         req.headers.authorization = 'Bearer: ' + session.token;
         const author = await postAuthor(req)
         const authors = await getAuthors(req);
-        successTemplate( res, 'authors', 'Authors', session,author.data.message,authors.data.result)
+        successTemplate( res, 'Authors', 'authors', session,author.data.message,authors.data.result)
     } catch (error) {
         return errorTemplate(req, res, 'Add a Author', 'addAuthor', error.message, 'undefined', session)
     }
@@ -45,9 +45,9 @@ const deleteAuthorHandler = async(req,res)=>{
         req.headers.authorization = 'Bearer: ' + session.token;
         const author = await deleteAuthor(req)
         const authors = await getAuthors(req);
-        successTemplate( res, 'authors', 'Authors', session,author.data.message,authors.data.result)
+        successTemplate( res, 'Authors', 'authors', session,author.data.message,authors.data.result)
     } catch (error) {
-        return errorTemplate(req, res, 'authors', 'Authors', error.message, 'undefined', session)    
+        return errorTemplate(req, res, 'Authors', 'authors', error.message, 'undefined', session)    
     }
 }
 const getEditAuthorByIdHandler = async (req, res)=>{
@@ -58,7 +58,7 @@ const getEditAuthorByIdHandler = async (req, res)=>{
         successTemplate( res, 'Edit a author', 'editAuthor', session,author.data.message,author.data.result)
 
     } catch (error) {
-        return errorTemplate(req, res, 'authors', 'Authors', error.message, 'undefined', session)    
+        return errorTemplate(req, res, 'Authors', 'authors', error.message, 'undefined', session)    
     }
 }
 const updateAuthorHandler = async (req, res)=>{
@@ -67,7 +67,7 @@ const updateAuthorHandler = async (req, res)=>{
         req.headers.authorization = 'Bearer: ' + session.token;
         const result = await patchAuthor(req)
         const authors = await getAuthors(req)
-        successTemplate( res, 'authors', 'Authors', session,result.data.message,authors.data.result)
+        successTemplate( res, 'Authors', 'authors', session,result.data.message,authors.data.result)
     } catch (error) {
         return errorTemplate(req, res, 'Edit a author', 'editAuthor', error.message, 'undefined', session)    
     }
